@@ -1,0 +1,28 @@
+.Dashboard{
+    width: 100vw;
+    height: 500px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.DashLinkContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;    
+}
+
+.DashLink{
+    width: 30%;
+    height: 200px;
+    background-color: whitesmoke;
+    color: black;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0px 2px 5px black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+}
