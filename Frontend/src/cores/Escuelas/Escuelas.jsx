@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { GrAdd } from "react-icons/gr";
+import { Link } from "react-router-dom";
+import { IoArrowBackOutline } from "react-icons/io5";
+import "./styles/escuelas.css"
 
 function Escuelas() {
   const [escuelas, setEscuelas] = useState();
@@ -16,7 +20,12 @@ function Escuelas() {
     fetchEscuelas();
   }, []);
   return (
-    <div>
+    <div className="escuelas-container">
+      <header className="escuelas-header">
+        <Link to="/">
+          <IoArrowBackOutline size="3rem" />
+        </Link>
+      </header>
       {escuelas && escuelas.length > 0 ? (
         <h3>
           {escuelas.map((escuela) => (
@@ -29,6 +38,9 @@ function Escuelas() {
       ) : (
         <h1>No hay escuelas disponibles</h1>
       )}
+      <Link to="/escuelas/create" className="create-button">
+        <GrAdd size="2rem" />
+      </Link>
     </div>
   );
 }

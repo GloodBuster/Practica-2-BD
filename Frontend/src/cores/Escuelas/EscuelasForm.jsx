@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./styles/escuelasForm.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { IoArrowBackOutline } from "react-icons/io5";
 
 function EscuelasForm() {
   const navigate = useNavigate();
@@ -32,9 +33,14 @@ function EscuelasForm() {
 
   return (
     <div className="EscuelasFormContainer">
+      <header className="EscuelasFormHeader">
+        <Link to="/escuelas">
+          <IoArrowBackOutline size="3rem" />
+        </Link>
+      </header>
       <form className="EscuelasForm" onSubmit={handleSubmit}>
         <h1>Escuela</h1>
-        <label htmlFor="">
+        <label>
           <h2>Codigo de escuela</h2>
           <input
             type="text"
@@ -45,7 +51,7 @@ function EscuelasForm() {
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="">
+        <label>
           <h2>Nombre de escuela</h2>
           <input
             type="text"
@@ -56,7 +62,7 @@ function EscuelasForm() {
             onChange={handleChange}
           />
         </label>
-        <label htmlFor="">
+        <label>
           <h2>Fecha de creacion de la escuela</h2>
           <input
             type="text"

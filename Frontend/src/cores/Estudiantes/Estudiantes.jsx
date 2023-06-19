@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { GrAdd } from "react-icons/gr";
+import { IoArrowBackOutline } from "react-icons/io5";
+import "./styles/estudiantes.css";
 
 function Estudiantes() {
   const [estudiantes, setEstudiantes] = useState();
@@ -16,7 +20,12 @@ function Estudiantes() {
     fetchEstudiantes();
   }, []);
   return (
-    <div>
+    <div className="estudiantes-container">
+      <header className="estudiantes-header">
+        <Link to="/">
+          <IoArrowBackOutline size="3rem" />
+        </Link>
+      </header>
       {estudiantes && estudiantes.length > 0 ? (
         <h3>
           {estudiantes.map((estudiante) => (
@@ -29,6 +38,9 @@ function Estudiantes() {
       ) : (
         <h1>No hay estudiantes disponibles</h1>
       )}
+      <Link to="/estudiantes/create" className="create-button">
+        <GrAdd size="2rem" />
+      </Link>
     </div>
   );
 }

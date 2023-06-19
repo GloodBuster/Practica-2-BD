@@ -1,0 +1,34 @@
+.EstudiantesFormContainer {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.EstudiantesHeader {
+  width: 80%;
+  margin-top: 38px;
+}
+
+.EstudiantesForm{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.EstudiantesForm label{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.EstudiantesForm button{
+    width: 30%;
+}
+
+.EstudiantesForm h1{
+    width: 60%;
+}
