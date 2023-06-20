@@ -15,12 +15,11 @@ function EscuelasForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      console.log(escuela);
       const response = await axios.post(
         "http://localhost:3000/escuelas",
         escuela
       );
-      console.log(response.data);
+      console.log(response);
       navigate("/escuelas");
     } catch (error) {
       console.log(error);

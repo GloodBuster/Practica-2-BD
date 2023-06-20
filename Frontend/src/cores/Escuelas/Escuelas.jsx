@@ -3,7 +3,8 @@ import axios from "axios";
 import { GrAdd } from "react-icons/gr";
 import { Link } from "react-router-dom";
 import { IoArrowBackOutline } from "react-icons/io5";
-import "./styles/escuelas.css"
+import "./styles/escuelas.css";
+import EscuelasTemplate from "./EscuelasTemplate";
 
 function Escuelas() {
   const [escuelas, setEscuelas] = useState();
@@ -18,7 +19,7 @@ function Escuelas() {
       }
     };
     fetchEscuelas();
-  }, []);
+  }, [escuelas]);
   return (
     <div className="escuelas-container">
       <header className="escuelas-header">
@@ -26,18 +27,22 @@ function Escuelas() {
           <IoArrowBackOutline size="3rem" />
         </Link>
       </header>
-      {escuelas && escuelas.length > 0 ? (
-        <h3>
-          {escuelas.map((escuela) => (
-            <p key={escuela.codescuela}>
-              La escuela con el codigo {escuela.codescuela} es{" "}
-              {escuela.nombreesc}
-            </p>
-          ))}
-        </h3>
-      ) : (
-        <h1>No hay escuelas disponibles</h1>
-      )}
+      <table className="escuelas-table">
+        <tr className="escuelas-table-header">
+          <th className="first-element">Codigo</th>
+          <th>Nombre</th>
+          <th>Fecha de creación</th>
+          <th></th>
+          <th className="last-element"></th>
+        </tr>
+        {escuelas && (
+          <>
+            {escuelas.map((escuela) => (
+              <EscuelasTemplate escuela={escuela} key={escuela.codescuela} />
+            ))}
+          </>
+        )}
+      </table>
       <Link to="/escuelas/create" className="create-button">
         <GrAdd size="2rem" />
       </Link>

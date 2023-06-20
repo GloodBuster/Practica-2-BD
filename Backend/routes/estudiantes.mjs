@@ -56,6 +56,15 @@ router.post("/", async (req, res) => {
   const fechanac = req.body.fechanac;
   const statusest = req.body.statusest;
   const codescuela = req.body.codescuela;
+  console.log({
+    cedula: cedula,
+    nombre: nombreest,
+    direccion: direccionest,
+    telefono: telefonoest,
+    fechaNacimiento: fechanac,
+    Estatus: statusest,
+    Codigo: codescuela,
+  });
   try {
     const query = {
       text: "INSERT INTO estudiantes (cedula, nombreest, direccionest, telefonoest, fechanac, statusest, codescuela) VALUES ($1, $2, $3, $4, $5, $6, $7)",
@@ -70,11 +79,9 @@ router.post("/", async (req, res) => {
       ],
     };
     await client.query(query);
-    res
-      .status(400)
-      .send("Se ha creado un nuevo estudiante en la base de datos");
+    res.send("Se ha creado un nuevo estudiante en la base de datos");
   } catch (error) {
-    res.send("No se pudo crear el estudiante");
+    res.status(400).send("No se pudo crear el estudiante");
   } finally {
     client.release();
   }
@@ -122,7 +129,7 @@ router.delete("/:cedula", async (req, res) => {
       values: [cedula],
     };
     await client.query(query);
-    res.send(`Se ha eliminado el usuario con la cedula ${cedula}`)
+    res.send(`Se ha eliminado el usuario con la cedula ${cedula}`);
   } catch (error) {
     res.send(`No existe el estudiante con la cedula ${cedula}`);
   } finally {

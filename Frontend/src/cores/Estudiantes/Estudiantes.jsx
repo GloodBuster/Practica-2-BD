@@ -26,10 +26,13 @@ function Estudiantes() {
           <IoArrowBackOutline size="3rem" />
         </Link>
       </header>
-      {estudiantes && estudiantes.length > 0 ? (
+      <main>
+        
+      </main>
+      {/*estudiantes && estudiantes.length > 0 ? (
         <h3>
           {estudiantes.map((estudiante) => (
-            <p>
+            <p key={estudiante.cedula}>
               El nombre del estudiante con la cedula {estudiante.cedula} es{" "}
               {estudiante.nombreest}
             </p>
@@ -37,7 +40,7 @@ function Estudiantes() {
         </h3>
       ) : (
         <h1>No hay estudiantes disponibles</h1>
-      )}
+      )*/}
       <Link to="/estudiantes/create" className="create-button">
         <GrAdd size="2rem" />
       </Link>
