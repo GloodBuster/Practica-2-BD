@@ -1,0 +1,18 @@
+.estudiantes-template {
+  background-color: white;
+}
+
+.estudiantes-template td {
+  padding: 8px;
+  font-size: 15px;
+}
+
+.press {
+  padding: 2px;
+}
+
+.press:hover {
+  cursor: pointer;
+  background-color: gray;
+  border-radius: 9999px;
+}

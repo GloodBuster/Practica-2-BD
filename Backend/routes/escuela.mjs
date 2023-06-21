@@ -85,7 +85,7 @@ router.put("/:codescuela", async (req, res) => {
       values: [nombreesc, fechacreacion, codescuela],
     };
     await client.query(query);
-    res.send("El escuela ha sido actualizado con exito");
+    res.send("La escuela ha sido actualizado con exito");
   } catch (error) {
     res.status(400).send("Error al actualizar la escuela");
   } finally {

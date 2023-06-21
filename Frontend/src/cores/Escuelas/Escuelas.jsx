@@ -28,19 +28,21 @@ function Escuelas() {
         </Link>
       </header>
       <table className="escuelas-table">
-        <tr className="escuelas-table-header">
-          <th className="first-element">Codigo</th>
-          <th>Nombre</th>
-          <th>Fecha de creación</th>
-          <th></th>
-          <th className="last-element"></th>
-        </tr>
+        <thead>
+          <tr className="escuelas-table-header">
+            <th className="first-element">Codigo</th>
+            <th>Nombre</th>
+            <th>Fecha de creación</th>
+            <th></th>
+            <th className="last-element"></th>
+          </tr>
+        </thead>
         {escuelas && (
-          <>
+          <tbody>
             {escuelas.map((escuela) => (
               <EscuelasTemplate escuela={escuela} key={escuela.codescuela} />
             ))}
-          </>
+          </tbody>
         )}
       </table>
       <Link to="/escuelas/create" className="create-button">

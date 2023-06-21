@@ -28,12 +28,12 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:cedula", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const client = await pool.connect();
-  const cedula = req.params.cedula;
+  const id = req.params.id;
   const query = {
-    text: "SELECT * FROM estudiantes WHERE cedula = $1",
-    values: [cedula],
+    text: "SELECT * FROM estudiantes WHERE idestudiante = $1",
+    values: [id],
   };
   try {
     const result = await client.query(query);
@@ -41,7 +41,7 @@ router.get("/:cedula", async (req, res) => {
   } catch (error) {
     res
       .status(400)
-      .json({ message: "No existe un estudiante con dicha cédula" });
+      .json({ message: "No existe un estudiante con dicho id" });
   } finally {
     client.release();
   }
@@ -56,15 +56,7 @@ router.post("/", async (req, res) => {
   const fechanac = req.body.fechanac;
   const statusest = req.body.statusest;
   const codescuela = req.body.codescuela;
-  console.log({
-    cedula: cedula,
-    nombre: nombreest,
-    direccion: direccionest,
-    telefono: telefonoest,
-    fechaNacimiento: fechanac,
-    Estatus: statusest,
-    Codigo: codescuela,
-  });
+
   try {
     const query = {
       text: "INSERT INTO estudiantes (cedula, nombreest, direccionest, telefonoest, fechanac, statusest, codescuela) VALUES ($1, $2, $3, $4, $5, $6, $7)",
@@ -87,9 +79,10 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.put("/:cedula", async (req, res) => {
+router.put("/:idestudiante", async (req, res) => {
   const client = await pool.connect();
-  const cedula = req.params.cedula;
+  const id = req.params.idestudiante;
+  const cedula = req.body.cedula;
   const nombreest = req.body.nombreest;
   const direccionest = req.body.direccionest;
   const telefonoest = req.body.telefonoest;
@@ -99,7 +92,7 @@ router.put("/:cedula", async (req, res) => {
 
   try {
     const query = {
-      text: "UPDATE estudiantes SET nombreest = $1, direccionest = $2, telefonoest = $3, fechanac = $4, statusest = $5, codescuela = $6 WHERE cedula = $7",
+      text: "UPDATE estudiantes SET nombreest = $1, direccionest = $2, telefonoest = $3, fechanac = $4, statusest = $5, codescuela = $6, cedula = $7 WHERE idestudiante = $8",
       values: [
         nombreest,
         direccionest,
@@ -108,10 +101,11 @@ router.put("/:cedula", async (req, res) => {
         statusest,
         codescuela,
         cedula,
+        id,
       ],
     };
     await client.query(query);
-    res.send(`El usuario con la cedula ${cedula} ha sido modificado`);
+    res.send(`El estudiante con el id ${id} ha sido modificado`);
   } catch (error) {
     res.send("No se pudo modificar el estudiante en la base de datos");
   } finally {
@@ -119,19 +113,19 @@ router.put("/:cedula", async (req, res) => {
   }
 });
 
-router.delete("/:cedula", async (req, res) => {
+router.delete("/:idestudiante", async (req, res) => {
   const client = await pool.connect();
-  const cedula = req.params.cedula;
+  const id = req.params.idestudiante;
 
   try {
     const query = {
-      text: "DELETE FROM estudiantes WHERE cedula = $1",
-      values: [cedula],
+      text: "DELETE FROM estudiantes WHERE idestudiante = $1",
+      values: [id],
     };
     await client.query(query);
-    res.send(`Se ha eliminado el usuario con la cedula ${cedula}`);
+    res.send(`Se ha eliminado el usuario con el id ${id}`);
   } catch (error) {
-    res.send(`No existe el estudiante con la cedula ${cedula}`);
+    res.send(`No existe el estudiante con el id ${id}`);
   } finally {
     client.release();
   }

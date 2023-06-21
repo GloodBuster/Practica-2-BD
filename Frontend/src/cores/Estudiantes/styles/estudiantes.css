@@ -20,3 +20,57 @@
     padding: 15px;
     border-radius: 15px;
 }
+
+.escuelas-container {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.escuelas-header {
+  width: 80%;
+  margin-top: 38px;
+}
+
+.create-button {
+  position: absolute;
+  right: 35px;
+  bottom: 35px;
+  background-color: green;
+  padding: 15px;
+  border-radius: 15px;
+}
+
+.estudiantes-table {
+  width: 1200px;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+.estudiantes-table-header {
+  background-image: linear-gradient(45deg, #826aed, #c879ff);
+  color: white;
+}
+
+.estudiantes-table-header th {
+  padding: 8px;
+  font-size: 17px;
+}
+
+.first-element {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.last-element {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.estudiantes-table th td {
+  width: 20%
+}
+

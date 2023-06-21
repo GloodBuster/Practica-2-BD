@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { GrAdd } from "react-icons/gr";
 import { IoArrowBackOutline } from "react-icons/io5";
 import "./styles/estudiantes.css";
+import EstudiantesTemplate from "./EstudiantesTemplate";
 
 function Estudiantes() {
   const [estudiantes, setEstudiantes] = useState();
@@ -18,7 +19,7 @@ function Estudiantes() {
       }
     };
     fetchEstudiantes();
-  }, []);
+  }, [estudiantes]);
   return (
     <div className="estudiantes-container">
       <header className="estudiantes-header">
@@ -26,21 +27,32 @@ function Estudiantes() {
           <IoArrowBackOutline size="3rem" />
         </Link>
       </header>
-      <main>
-        
-      </main>
-      {/*estudiantes && estudiantes.length > 0 ? (
-        <h3>
-          {estudiantes.map((estudiante) => (
-            <p key={estudiante.cedula}>
-              El nombre del estudiante con la cedula {estudiante.cedula} es{" "}
-              {estudiante.nombreest}
-            </p>
-          ))}
-        </h3>
-      ) : (
-        <h1>No hay estudiantes disponibles</h1>
-      )*/}
+      <table className="estudiantes-table">
+        <thead>
+          <tr className="estudiantes-table-header">
+            <th className="first-element">ID</th>
+            <th>Cedula</th>
+            <th>Nombre</th>
+            <th>Escuela</th>
+            <th>Direccion</th>
+            <th>Telefono</th>
+            <th>Fecha Nacimiento</th>
+            <th>Estatus</th>
+            <th></th>
+            <th className="last-element"></th>
+          </tr>
+        </thead>
+        {estudiantes && (
+          <tbody>
+            {estudiantes.map((estudiante) => (
+              <EstudiantesTemplate
+                estudiante={estudiante}
+                key={estudiante.idestudiante}
+              />
+            ))}
+          </tbody>
+            )}
+      </table>
       <Link to="/estudiantes/create" className="create-button">
         <GrAdd size="2rem" />
       </Link>

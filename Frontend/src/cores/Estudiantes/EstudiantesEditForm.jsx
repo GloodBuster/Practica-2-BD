@@ -1,12 +1,12 @@
-import React from "react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { IoArrowBackOutline } from "react-icons/io5";
-import { Link, useNavigate } from "react-router-dom";
 import "./styles/estudiantesForm.css";
-import { useState } from "react";
 import axios from "axios";
 
-function EstudiantesForm() {
+function EstudiantesEditForm() {
   const navigate = useNavigate();
+  const id = useParams().id;
   const [estudiante, setEstudiante] = useState({
     cedula: "",
     nombreest: "",
@@ -16,12 +16,24 @@ function EstudiantesForm() {
     statusest: "",
     codescuela: "",
   });
-
+  useEffect(() => {
+    const fetchEstudiante = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/estudiantes/${id}`
+        );
+        setEstudiante(response.data[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchEstudiante();
+  }, []);
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:3000/estudiantes",
+      const response = await axios.put(
+        `http://localhost:3000/estudiantes/${id}`,
         estudiante
       );
       console.log(response);
@@ -30,11 +42,9 @@ function EstudiantesForm() {
       console.log(error);
     }
   };
-
   const handleChange = (event) => {
     setEstudiante({ ...estudiante, [event.target.name]: event.target.value });
   };
-
   return (
     <div className="EstudiantesFormContainer">
       <header className="EstudiantesHeader">
@@ -46,7 +56,6 @@ function EstudiantesForm() {
         <h1>Estudiantes</h1>
         <label>
           <h2>Cedula</h2>
-
           <input
             type="text"
             name="cedula"
@@ -111,7 +120,7 @@ function EstudiantesForm() {
             name="fechanac"
             required
             placeholder="YYYY-MM-DD"
-            value={estudiante.fechanac}
+            value={estudiante.fechanac.substring(0, 10)}
             onChange={handleChange}
           />
         </label>
@@ -127,10 +136,10 @@ function EstudiantesForm() {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Crear Estudiante</button>
+        <button type="submit">Editar Estudiante</button>
       </form>
     </div>
   );
 }
 
-export default EstudiantesForm;
+export default EstudiantesEditForm;
